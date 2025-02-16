@@ -1,0 +1,44 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+# Allow loopback traffic
+-A INPUT -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
+
+# Allow RELATED and ESTABLISHED traffic
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# Allow SSH from local network
+-A INPUT -p tcp -s 192.168.0.0/22 --dport 22 -j ACCEPT
+
+# Allow incoming Samba connections from local network
+-A INPUT -p tcp -s 192.168.0.0/22 --dport 445 -j ACCEPT
+
+# Allow outgoing NTP
+-A OUTPUT -p udp --dport 123 -j ACCEPT
+
+# Allow incoming Immich connections
+-A INPUT -p tcp --dport 2283 -j ACCEPT
+
+# Allow outgoing DNS
+-A OUTPUT -p udp -d 192.168.0.1 --dport 53 -j ACCEPT
+-A OUTPUT -p udp -d 8.8.8.8 --dport 53 -j ACCEPT
+-A OUTPUT -p udp -d 8.8.4.4 --dport 53 -j ACCEPT
+
+# Allow outgoing HTTP/HTTPS
+-A OUTPUT -p tcp --dport 80 -j ACCEPT
+-A OUTPUT -p tcp --dport 443 -j ACCEPT
+
+# Logging
+-A INPUT -j LOG --log-prefix "IPTABLES_DROP: " --log-level 7
+
+# Drop all other incoming traffic
+-A INPUT -j DROP
+
+# Drop all other forwarding traffic
+-A FORWARD -j DROP
+
+COMMIT
