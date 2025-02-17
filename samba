@@ -6,6 +6,7 @@ Server role: ROLE_STANDALONE
         client ipc min protocol = SMB3
         client ipc signing = required
         client signing = required
+        disable netbios = yes
         interfaces = eth0
         map to guest = Bad User
         restrict anonymous = 2
