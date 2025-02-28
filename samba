@@ -1,40 +1,70 @@
-Server role: ROLE_STANDALONE
+# Server role: standalone
+server role = standalone
 
 # Global parameters
 [global]
-        bind interfaces only = yes
-        client ipc min protocol = SMB3
-        client ipc signing = required
-        client signing = required
-        disable netbios = yes
-        interfaces = eth0
-        map to guest = Bad User
-        restrict anonymous = 2
-        security = USER
-        server min protocol = SMB3
-        server signing = required
-        socket options = TCP_NODELAY IPTOS_LOWDELAY
-        fruit:metadata = stream
-        fruit:model = MacSamba
-        fruit:veto_appledouble = no
-        fruit:nfs_aces = no
-        fruit:wipe_intentionally_left_blank_rfork = yes
-        fruit:delete_empty_adfiles = yes
-        fruit:posix_rename = yes
-        idmap config * : backend = tdb
-        browseable = no
-        hosts allow = 192.168.0.0/22
-        hosts deny = 0.0.0.0/0
-        vfs objects = fruit streams_xattr
+  # Bind to all available network interfaces
+  bind interfaces only = yes
 
+  # Set the minimum and maximum SMB protocol versions
+  client ipc min protocol = SMB3
+  client ipc signing = required
+  client signing = required
+  server min protocol = SMB3
+  server signing = required
 
+  # Disable NetBIOS over TCP/IP
+  disable netbios = yes
+
+  # Map unknown users to the guest account
+  map to guest = Bad User
+
+  # Restrict anonymous access
+  restrict anonymous = 2
+
+  # Set the security mode to user-level authentication
+  security = USER
+
+  # Optimize socket options for performance
+  socket options = TCP_NODELAY IPTOS_LOWDELAY
+
+  # Enable Fruit metadata streaming for macOS compatibility
+  fruit:metadata = stream
+  fruit:model = MacSamba
+  fruit:veto_appledouble = no
+  fruit:nfs_aces = no
+  fruit:wipe_intentionally_left_blank_rfork = yes
+  fruit:delete_empty_adfiles = yes
+  fruit:posix_rename = yes
+
+  # Use the TDB backend for ID mapping
+  idmap config * : backend = tdb
+
+  # Disable browsing of shares
+  browseable = no
+
+  # Enable VFS objects for Fruit and streams_xattr
+  vfs objects = fruit streams_xattr
+
+# Time Machine share
 [Time Machine]
-        comment = Time Machine Backup
-        force create mode = 0660
-        force directory mode = 0770
-        force group = smb_group
-        force user = nobody
-        inherit acls = yes
-        path = /pool/time_machine
-        read only = no
-        fruit:time machine = yes
+  # Set the comment for the share
+  comment = Time Machine Backup
+
+  # Set the permissions for the share
+  force create mode = 0660
+  force directory mode = 0770
+  force group = samba_group
+  force user = nobody
+
+  # Enable ACL inheritance
+  inherit acls = yes
+
+  # Set the path to the Time Machine backup directory
+  path = /$POOL_NAME/time_machine
+
+  # Allow read and write access to the share
+  read only = no
+
+  # Enable Time Machine support
+  fruit:time machine = yes
