@@ -143,6 +143,7 @@ DB_DATABASE_NAME=immich
 DB_PASSWORD=$DB_PASSWORD
 IMMICH_VERSION=release
 EOF
+chmod 600 ~/.env
 
 # Start Docker
 rc-service docker start
@@ -190,9 +191,11 @@ cat > /etc/iptables/rules-save <<EOF
 EOF
 iptables-save > /etc/iptables/rules-save
 
+# Restart networking
 echo "Restarting networking..."
 rc-service networking restart
 
+# Configure crontab to schedule daily updates and maintenance tasks
 echo "Configuring crontab..."
 crontab -l | { 
   cat; 
@@ -200,9 +203,11 @@ crontab -l | {
   echo "30 3 * * * docker compose pull && docker compose up -d && docker image prune -af"; 
 } | crontab -
 
+# Set permissions for sensitive files and system directories
 chmod 700 /root
 chmod 600 /boot/grub/grub.cfg
 chmod 600 /etc/ssh/sshd_config
-chmod 600 ~/.env
 
+
+# Done
 echo "Done"
