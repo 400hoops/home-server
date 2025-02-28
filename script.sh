@@ -3,7 +3,7 @@
 # Check if the system is running Alpine Linux
 if [ -x "/sbin/apk" ]; then
   echo "Installing necessary dependencies..."
-  apk add samba nano docker docker-compose zfs zfs-lts iptables
+  apk add samba nano docker docker-compose zfs zfs-lts iptables wget
 else
   echo "Error: This script is designed for Alpine Linux only."
   exit 1
@@ -155,6 +155,24 @@ server role = standalone
   # Enable Time Machine support
   fruit:time machine = yes
 
+EOF
+
+# Configure Docker
+
+# Get the docker-compose file from github/immich-app/immich
+wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+
+DB_PASSWORD=$(openssl rand -base64 12)
+
+# Create the .env file in the user's home directory
+
+cat > ~/.env <<EOF
+UPLOAD_LOCATION=/$POOL_NAME/immich/library
+DB_DATA_LOCATION=/$POOL_NAME/immich/postgres
+DB_USERNAME=postgres
+DB_DATABASE_NAME=immich
+DB_PASSWORD=e0f
+IMMICH_VERSION=release
 EOF
 
 # Get the new port number from the user
