@@ -222,4 +222,4 @@ crontab -l | {
   chmod 600 /boot/grub/grub.cfg
   chmod 600 /etc/ssh/sshd_config
 
-echo "Dones"
+echo "Done"
