@@ -128,7 +128,7 @@ EOF
 # Start Samba
 rc-service samba start
 
-# Download the latest docker-compose.yml file from immich-app/immich
+# Download the latest docker-compose.yml file from /immich-app/immich
 wget -O ~/docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
 
 # Create a random password for the Immich database
