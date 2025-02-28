@@ -126,7 +126,7 @@ server role = standalone
 EOF
 
 # Configure Docker
-wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+wget -O ~/docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
 
 DB_PASSWORD=$(openssl rand -base64 12)
 
