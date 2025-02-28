@@ -83,7 +83,6 @@ chown :samba_group /$POOL_NAME/time_machine
 echo "Configuring Samba..."
 rm /etc/samba/smb.conf
 cat > /etc/samba/smb.conf <<EOF
-
 # Server role: standalone
 server role = standalone
 
@@ -154,7 +153,6 @@ server role = standalone
 
   # Enable Time Machine support
   fruit:time machine = yes
-
 EOF
 
 # Configure Docker
