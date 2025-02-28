@@ -208,6 +208,5 @@ chmod 700 /root
 chmod 600 /boot/grub/grub.cfg
 chmod 600 /etc/ssh/sshd_config
 
-
 # Done
 echo "Done"
