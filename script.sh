@@ -139,6 +139,9 @@ DB_PASSWORD=$DB_PASSWORD
 IMMICH_VERSION=release
 EOF
 
+rc-service docker start
+docker compose up -d
+
 # Get the new port number from the user
 read -p "Enter a new port number (default is 22): " PORT_NUMBER
 
