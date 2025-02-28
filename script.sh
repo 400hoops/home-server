@@ -125,11 +125,13 @@ server role = standalone
   fruit:time machine = yes
 EOF
 
-# Configure Docker
+# Download the latest docker-compose.yml file from immich-app/immich
 wget -O ~/docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
 
+# Create a random password for the Immich database
 DB_PASSWORD=$(openssl rand -base64 12)
 
+# Create a .env file with Immich configuration variables
 cat > ~/.env <<EOF
 UPLOAD_LOCATION=/"$POOL_NAME"/immich/library
 DB_DATA_LOCATION=/"$POOL_NAME"/immich/postgres
@@ -139,6 +141,7 @@ DB_PASSWORD=$DB_PASSWORD
 IMMICH_VERSION=release
 EOF
 
+# Start Docker
 rc-service docker start
 docker compose up -d
 
