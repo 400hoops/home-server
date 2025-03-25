@@ -189,6 +189,8 @@ iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT;
 iptables -A INPUT -j LOG --log-prefix "IPTABLES_DROP: " --log-level 7;
 iptables -A INPUT -j DROP;
 iptables -A FORWARD -j DROP;
+
+# Save the updated iptables rules
 iptables-save > /etc/iptables/rules-save
 
 # Restart networking
