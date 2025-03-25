@@ -114,7 +114,7 @@ server role = standalone
   force group = samba_group
   force user = nobody
   inherit acls = yes
-  path = /"$POOL_NAME"/time_machine
+  path = /$POOL_NAME/time_machine
   read only = no
   fruit:time machine = yes
 EOF
@@ -130,8 +130,8 @@ DB_PASSWORD=$(openssl rand -base64 12)
 
 # Create a .env file with Immich configuration variables
 cat > ~/.env <<EOF
-UPLOAD_LOCATION=/"$POOL_NAME"/immich/library
-DB_DATA_LOCATION=/"$POOL_NAME"/immich/postgres
+UPLOAD_LOCATION=/$POOL_NAME/immich/library
+DB_DATA_LOCATION=/$POOL_NAME/immich/postgres
 DB_USERNAME=postgres
 DB_DATABASE_NAME=immich
 DB_PASSWORD=$DB_PASSWORD
