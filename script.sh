@@ -51,8 +51,8 @@ read -p "Enter the path of the second drive you want to mirror (e.g., sdb): " DR
 mkdir -p /zfs
 
 # Generate a random key for the ZFS pool
-openssl rand -out /zfs/$POOL_NAME.key -rand /dev/urandom 32
-chmod 600 /zfs/$POOL_NAME.key
+openssl rand -out /zfs/"$POOL_NAME".key -rand /dev/urandom 32
+chmod 600 /zfs/"$POOL_NAME".key
 
 # Create the ZFS pool with encryption
 
