@@ -195,6 +195,10 @@ iptables-save > /etc/iptables/rules-save
 echo "Restarting networking..."
 rc-service networking restart
 
+# Enable the iptables service to start at boot
+echo "Enabling iptables service to start at boot..."
+rc-update add iptables default
+
 # Configure crontab to schedule daily updates and maintenance tasks
 echo "Configuring crontab..."
 crontab -l | { 
