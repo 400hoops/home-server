@@ -140,6 +140,7 @@ EOF
 chmod 600 ~/.env
 
 # Start Docker
+cd
 rc-service docker start
 docker compose up -d
 
