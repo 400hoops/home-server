@@ -140,9 +140,8 @@ EOF
 chmod 600 ~/.env
 
 # Start Docker
-cd
 rc-service docker start
-docker compose up -d
+cd && docker compose up -d
 
 # Get the new port number from the user
 read -p "Enter a new port number (default is 22): " PORT_NUMBER
