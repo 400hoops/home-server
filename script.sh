@@ -44,8 +44,8 @@ echo "Available disks:"
 lsblk -d -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL
 
 # Get the paths of the disks to mirror from the user
-read -p "Enter the path of the first drive you want to mirror (e.g., /dev/sda): " DRIVE_ID_1
-read -p "Enter the path of the second drive you want to mirror (e.g., /dev/sdb): " DRIVE_ID_2
+read -p "Enter the path of the first drive you want to mirror (e.g., sda): " DRIVE_ID_1
+read -p "Enter the path of the second drive you want to mirror (e.g., sdb): " DRIVE_ID_2
 
 # Create the ZFS directory
 mkdir -p /zfs
@@ -55,7 +55,7 @@ openssl rand -out /zfs/"$POOL_NAME".key -rand /dev/urandom 32
 chmod 600 /zfs/"$POOL_NAME".key
 
 # Create the ZFS pool with encryption
-zpool create -f -o ashift=12 -O encryption=aes-256-ccm -O keylocation=file:///zfs/"$POOL_NAME".key -O keyformat=raw "$POOL_NAME" mirror "$DRIVE_ID_1" "$DRIVE_ID_2"
+zpool create -f -o ashift=12 -O encryption=aes-256-ccm -O keylocation=file:///zfs/"$POOL_NAME".key -O keyformat=raw "$POOL_NAME" mirror "/dev/$DRIVE_ID_1" "/dev/$DRIVE_ID_2"
 if [ $? -ne 0 ]; then
   echo "Error: Failed to create ZFS pool."
   exit 1
