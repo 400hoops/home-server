@@ -199,7 +199,31 @@ rc-service networking restart
 
 # Enable the iptables service to start at boot
 echo "Enabling iptables service to start at boot..."
-rc-update add iptables default
+rc-update add iptables boot
+
+# Configure Fail2Ban
+echo "Configuring Fail2Ban..."
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+sed -i "s/^bantime =.*/bantime = 3600/" /etc/fail2ban/jail.local
+sed -i "s/^findtime =.*/findtime = 600/" /etc/fail2ban/jail.local
+sed -i "s/^maxretry =.*/maxretry = 3/" /etc/fail2ban/jail.local
+
+# Configure SSH jail
+echo "Configuring SSH jail..."
+cat >> /etc/fail2ban/jail.local <<EOF
+[ssh]
+enabled = true
+port = $PORT_NUMBER
+filter = sshd
+logpath = /var/log/messages
+maxretry = 3
+EOF
+
+# Start Fail2Ban
+rc-service fail2ban start
+
+# Enable Fail2Ban to start at boot
+rc-update add fail2ban boot
 
 # Configure crontab to schedule daily updates and maintenance tasks
 echo "Configuring crontab..."
