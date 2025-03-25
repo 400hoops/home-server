@@ -47,12 +47,6 @@ lsblk -d -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL
 read -p "Enter the path of the first drive you want to mirror (e.g., /dev/sda): " DRIVE_ID_1
 read -p "Enter the path of the second drive you want to mirror (e.g., /dev/sdb): " DRIVE_ID_2
 
-# Validate the disk paths
-if [ ! -b "$DRIVE_ID_1" ] || [ ! -b "$DRIVE_ID_2" ]; then
-  echo "Error: Invalid disk path. Please ensure the disks are connected and try again."
-  exit 1
-fi
-
 # Create the ZFS directory
 mkdir -p /zfs
 
