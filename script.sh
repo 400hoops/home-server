@@ -17,6 +17,7 @@ rc-update add zfs-import sysinit
 rc-update add zfs-mount sysinit
 rc-update add samba default
 rc-update add docker default
+rc-update add fail2ban default
 
 # Create a new group and user for Samba
 echo "Creating a new group and user for Samba..."
@@ -203,7 +204,7 @@ rc-service networking restart
 
 # Enable the iptables service to start at boot
 echo "Enabling iptables service to start at boot..."
-rc-update add iptables boot
+rc-update add iptables dafault
 
 # Configure Fail2Ban
 echo "Configuring Fail2Ban..."
@@ -225,9 +226,6 @@ EOF
 
 # Start Fail2Ban
 rc-service fail2ban start
-
-# Enable Fail2Ban to start at boot
-rc-update add fail2ban boot
 
 # Configure crontab to schedule daily updates and maintenance tasks
 echo "Configuring crontab..."
