@@ -3,7 +3,7 @@
 # Check if the system is running Alpine Linux
 if [ -x "/sbin/apk" ]; then
   echo "Installing necessary dependencies..."
-  apk add samba nano docker docker-compose zfs zfs-lts iptables wget lsblk
+  apk add samba nano docker docker-compose zfs zfs-lts iptables wget lsblk fail2ban
 else
   echo "Error: This script is designed for Alpine Linux only."
   exit 1
@@ -159,11 +159,15 @@ fi
 
 # Update the SSH configuration
 sed -i "s/^#Port.*/Port $PORT_NUMBER/" /etc/ssh/sshd_config
+sed -i "s/^#PasswordAuthentication.*/PasswordAuthentication no/" /etc/ssh/sshd_config
+sed -i "s/^#PubkeyAuthentication.*/PubkeyAuthentication yes/" /etc/ssh/sshd_config
 
 # Restart the SSH service
 rc-service sshd restart
 
 echo "SSH port changed to $PORT_NUMBER"
+echo "SSH key pair generated and copied to authorized_keys file"
+echo "Password authentication disabled, public key authentication enabled"
 
 # Configure iptables
 echo "Configuring iptables..."
