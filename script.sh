@@ -169,20 +169,27 @@ echo "SSH port changed to $PORT_NUMBER"
 echo "Configuring iptables..."
 rc-service iptables stop
 mkdir -p /etc/iptables
-cat > /etc/iptables/rules-save <<EOF
-*filter
-:INPUT DROP [0:0]
-:FORWARD DROP [0:0]
-:OUTPUT DROP [0:0]
+iptables -F; iptables -X; iptables -Z;
+iptables -P INPUT DROP;
+iptables -P FORWARD DROP;
+iptables -P OUTPUT DROP;
+iptables -A INPUT -i lo -j ACCEPT;
+iptables -A OUTPUT -o lo -j ACCEPT;
+iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT;
+iptables -A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT;
+iptables -A INPUT -p tcp -s 192.168.0.0/22 --dport 22 -j ACCEPT;
+iptables -A INPUT -p tcp -s 192.168.0.0/22 --dport 445 -j ACCEPT;
+iptables -A OUTPUT -p udp --dport 123 -j ACCEPT;
+iptables -A INPUT -p tcp --dport 2283 -j ACCEPT;
+iptables -A OUTPUT -p udp -d 192.168.0.1 --dport 53 -j ACCEPT;
+iptables -A OUTPUT -p udp -d 8.8.8.8 --dport 53 -j ACCEPT;
+iptables -A OUTPUT -p udp -d 8.8.4.4 --dport 53 -j ACCEPT;
+iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT;
+iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT;
+iptables -A INPUT -j LOG --log-prefix "IPTABLES_DROP: " --log-level 7;
+iptables -A INPUT -j DROP;
+iptables -A FORWARD -j DROP;
 
--A INPUT -i lo -j ACCEPT
--A OUTPUT -o lo -j ACCEPT
--A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
--A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
--A INPUT -p tcp --dport $PORT_NUMBER -j ACCEPT
--A INPUT -p tcp --dport 445 -j ACCEPT
--A OUTPUT -p udp -j ACCEPT
-EOF
 iptables-save > /etc/iptables/rules-save
 
 # Restart networking
