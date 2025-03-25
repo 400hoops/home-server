@@ -3,7 +3,7 @@
 # Check if the system is running Alpine Linux
 if [ -x "/sbin/apk" ]; then
   echo "Installing necessary dependencies..."
-  apk add samba nano docker docker-compose zfs zfs-lts iptables wget
+  apk add samba nano docker docker-compose zfs zfs-lts iptables wget lsblk
 else
   echo "Error: This script is designed for Alpine Linux only."
   exit 1
