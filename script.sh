@@ -202,10 +202,6 @@ iptables-save > /etc/iptables/rules-save
 echo "Restarting networking..."
 rc-service networking restart
 
-# Enable the iptables service to start at boot
-echo "Enabling iptables service to start at boot..."
-rc-update add iptables dafault
-
 # Configure Fail2Ban
 echo "Configuring Fail2Ban..."
 cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
