@@ -186,6 +186,7 @@ iptables -A INPUT -p tcp -s 192.168.0.0/22 --dport 22 -j ACCEPT;
 iptables -A INPUT -p tcp -s 192.168.0.0/22 --dport 445 -j ACCEPT;
 iptables -A OUTPUT -p udp --dport 123 -j ACCEPT;
 iptables -A INPUT -p tcp --dport 2283 -j ACCEPT;
+iptables -A INPUT -p tcp --dport 5000 -j ACCEPT;
 iptables -A OUTPUT -p udp -d 192.168.0.1 --dport 53 -j ACCEPT;
 iptables -A OUTPUT -p udp -d 8.8.8.8 --dport 53 -j ACCEPT;
 iptables -A OUTPUT -p udp -d 8.8.4.4 --dport 53 -j ACCEPT;
