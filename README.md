@@ -47,16 +47,20 @@ cd home-server
 chmod +x script.sh
 ./script.sh
 ```
-    Load firewall rules (example):
+***Load firewall rules (example):
 
+```bash
 sudo iptables-restore < iptables/rules.v4
+```
 
     Configure Samba:
-
+```bash
 sudo cp samba/smb.conf /etc/samba/smb.conf
 sudo systemctl restart smbd
+```
+- Note: Use whoogle.env with your Docker Compose or container config to run Whoogle privately.
 
-    Use whoogle.env with your Docker Compose or container config to run Whoogle privately.
+---
 
 ## 📌 Features
 
@@ -72,10 +76,15 @@ sudo systemctl restart smbd
 
 - ⚡ Runs on minimal resources
 
+---
+
 ## 📄 License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
-🙌 Acknowledgments
+Licensed under the [MIT License](LICENSE).
+
+---
+
+## 🙌 Acknowledgments
 
 - Alpine Linux
 
