@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏠 Home Server</title>
+    <style>
+      @font-face {
+        font-family: "Overpass";
+        src: url("fonts/Overpass-VariableFont_wght.ttf")
+          format("truetype-variations");
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: "Material Symbols Outlined";
+        src: url("fonts/MaterialSymbolsOutlined-Regular.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Material Icons Outlined";
+        src: url("fonts/MaterialIconsOutlined-Regular.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Overpass", sans-serif;
+        background-color: #2f2225;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 0;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+        margin: 10px 0;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        font-size: 0.875rem;
+        color: #cfcfcf;
+        margin-bottom: 25px;
+        font-weight: 400;
+      }
+
+      a,
+      a:visited,
+      a:active,
+      a:hover {
+        color: white;
+        text-decoration: none;
+        outline: none;
+      }
+
+      .search {
+        margin-bottom: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .search input {
+        width: 100%;
+        max-width: 1000px;
+        padding: 20px 20px;
+        font-size: 1.125rem;
+        border-radius: 20px;
+        border: none;
+        background-color: #3b2c30;
+        color: white;
+        outline: none;
+        box-sizing: border-box;
+        text-align: left;
+      }
+
+      .pages {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        width: 100%;
+        max-width: 600px;
+        gap: 20px;
+        padding-bottom: 30px;
+        height: 300px;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        justify-content: left;
+      }
+
+      .pages::-webkit-scrollbar {
+        display: none;
+      }
+
+      .page {
+        min-width: 100%;
+        scroll-snap-align: start;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 10px;
+        justify-items: center;
+        align-items: center;
+      }
+
+      .icon-wrapper {
+        background-color: #3c2f31;
+        border: 1px solid #695d5f;
+        width: 72px;
+        height: 72px;
+        border-radius: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.2s ease;
+        margin: 0 auto;
+      }
+
+      .icon-wrapper:hover {
+        transform: scale(1.05);
+      }
+
+      .material-icons-outlined {
+        font-family: "Material Icons Outlined";
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .material-symbols-outlined {
+        font-family: "Material Symbols Outlined";
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        direction: ltr;
+      }
+
+      .app-name {
+        margin-top: 13px;
+        font-size: 0.8125rem;
+        height: 20px;
+      }
+
+      .dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: -10px;
+        cursor: pointer;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #777;
+        transition: background-color 0.2s ease;
+      }
+
+      .dot.active {
+        background-color: #fff;
+      }
+
+      .status {
+        margin-top: 40px;
+        font-size: 0.8125rem;
+        color: #bcbcbc;
+        text-align: center;
+      }
+
+      .status span {
+        color: #ffffff;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🏠 Home Server</h1>
+    <div class="subtitle">Quick access to your self-hosted services</div>
+
+    <section class="search">
+      <form
+        action="http://192.168.88.54:5000/search"
+        method="GET"
+        target="_blank"
+        autocomplete="off"
+      >
+        <input
+          type="text"
+          name="q"
+          placeholder="Search with..."
+          autocomplete="off"
+        />
+      </form>
+    </section>
+
+    <div class="pages" id="pages">
+      <div class="page">
+        <div class="app">
+          <a
+            href="http://192.168.90.1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">lan</span>
+            </div>
+            <div class="app-name">Router</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:8123"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">home</span>
+            </div>
+            <div class="app-name">Smart Home</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:8920"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">tv</span>
+            </div>
+            <div class="app-name">Media</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:8080"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">cloud</span>
+            </div>
+            <div class="app-name">Cloud</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:2283"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">photo_library</span>
+            </div>
+            <div class="app-name">Photos</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:8443"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">code</span>
+            </div>
+            <div class="app-name">Code</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:5000"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">search</span>
+            </div>
+            <div class="app-name">Search</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:4833"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">key</span>
+            </div>
+            <div class="app-name">Password Generator</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="app">
+          <a
+            href="http://192.168.88.54:0"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">library_books</span>
+            </div>
+            <div class="app-name">Books</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:8000"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-symbols-outlined">deployed_code</span>
+            </div>
+            <div class="app-name">Containers</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="smb://192.168.88.54/time machine"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-symbols-outlined">hard_disk</span>
+            </div>
+            <div class="app-name">Storage</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+    </div>
+
+    <script>
+      const pages = document.getElementById("pages");
+      const dots = document.querySelectorAll(".dot");
+
+      dots[0].classList.add("active");
+
+      pages.addEventListener("scroll", () => {
+        const index = Math.round(pages.scrollLeft / pages.offsetWidth);
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === index);
+        });
+      });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => {
+          pages.scrollTo({
+            left: i * pages.offsetWidth,
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
