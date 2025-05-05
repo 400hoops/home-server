@@ -4,15 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🏠 Home Server</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-      rel="stylesheet"
-    />
     <style>
+      @font-face {
+        font-family: "Overpass";
+        src: url("fonts/Overpass-VariableFont_wght.ttf")
+          format("truetype-variations");
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: "Material Symbols Outlined";
+        src: url("fonts/MaterialSymbolsOutlined-Regular.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Material Icons Outlined";
+        src: url("fonts/MaterialIconsOutlined-Regular.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
         font-family: "Overpass", sans-serif;
@@ -28,14 +43,16 @@
       }
 
       h1 {
-        font-size: 28px;
+        font-size: 1.75rem;
         margin: 10px 0;
+        font-weight: 700;
       }
 
       .subtitle {
-        font-size: 14px;
+        font-size: 0.875rem;
         color: #cfcfcf;
         margin-bottom: 25px;
+        font-weight: 400;
       }
 
       a,
@@ -56,10 +73,10 @@
       }
 
       .search input {
-        width: 500px;
-        max-width: 700px;
-        padding: 20px 24px;
-        font-size: 18px;
+        width: 100%;
+        max-width: 1000px;
+        padding: 20px 20px;
+        font-size: 1.125rem;
         border-radius: 20px;
         border: none;
         background-color: #3b2c30;
@@ -97,7 +114,6 @@
         gap: 10px;
         justify-items: center;
         align-items: center;
-        width: 100%;
       }
 
       .icon-wrapper {
@@ -118,13 +134,35 @@
       }
 
       .material-icons-outlined {
-        font-size: 32px;
-        color: white;
+        font-family: "Material Icons Outlined";
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .material-symbols-outlined {
+        font-family: "Material Symbols Outlined";
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        direction: ltr;
       }
 
       .app-name {
         margin-top: 13px;
-        font-size: 13px;
+        font-size: 0.8125rem;
         height: 20px;
       }
 
@@ -150,7 +188,7 @@
 
       .status {
         margin-top: 40px;
-        font-size: 13px;
+        font-size: 0.8125rem;
         color: #bcbcbc;
         text-align: center;
       }
@@ -161,41 +199,58 @@
       }
     </style>
   </head>
-
   <body>
     <h1>🏠 Home Server</h1>
     <div class="subtitle">Quick access to your self-hosted services</div>
 
-    <div class="search">
+    <section class="search">
       <form
-        action="http://192.168.0.0:5000/search"
+        action="http://192.168.88.54:5000/search"
         method="GET"
         target="_blank"
+        autocomplete="off"
       >
-        <input type="text" name="q" placeholder="Search with..." />
+        <input
+          type="text"
+          name="q"
+          placeholder="Search with..."
+          autocomplete="off"
+        />
       </form>
-    </div>
+    </section>
 
     <div class="pages" id="pages">
       <div class="page">
         <div class="app">
-          <a href="http://192.168.0.0" target="_blank">
+          <a
+            href="http://192.168.90.1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
-              <span class="material-icons-outlined">router</span>
+              <span class="material-icons-outlined">lan</span>
             </div>
             <div class="app-name">Router</div>
           </a>
         </div>
         <div class="app">
-          <a href="http://192.168.0.0:0" target="_blank">
+          <a
+            href="http://192.168.88.54:8123"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
-              <span class="material-icons-outlined">house</span>
+              <span class="material-icons-outlined">home</span>
             </div>
             <div class="app-name">Smart Home</div>
           </a>
         </div>
         <div class="app">
-          <a href="http://192.168.0.0:0" target="_blank">
+          <a
+            href="http://192.168.88.54:8920"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
               <span class="material-icons-outlined">tv</span>
             </div>
@@ -203,7 +258,11 @@
           </a>
         </div>
         <div class="app">
-          <a href="http://192.168.0.0:0" target="_blank">
+          <a
+            href="http://192.168.88.54:8080"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
               <span class="material-icons-outlined">cloud</span>
             </div>
@@ -211,15 +270,23 @@
           </a>
         </div>
         <div class="app">
-          <a href="http://192.168.0.0:0" target="_blank">
+          <a
+            href="http://192.168.88.54:2283"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
-              <span class="material-icons-outlined">photo</span>
+              <span class="material-icons-outlined">photo_library</span>
             </div>
             <div class="app-name">Photos</div>
           </a>
         </div>
         <div class="app">
-          <a href="http://192.168.0.0:0" target="_blank">
+          <a
+            href="http://192.168.88.54:8443"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
               <span class="material-icons-outlined">code</span>
             </div>
@@ -227,7 +294,11 @@
           </a>
         </div>
         <div class="app">
-          <a href="http://192.168.0.0:0" target="_blank">
+          <a
+            href="http://192.168.88.54:5000"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
               <span class="material-icons-outlined">search</span>
             </div>
@@ -235,7 +306,11 @@
           </a>
         </div>
         <div class="app">
-          <a href="http://192.168.0.0:0" target="_blank">
+          <a
+            href="http://192.168.88.54:4833"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
               <span class="material-icons-outlined">key</span>
             </div>
@@ -246,11 +321,39 @@
 
       <div class="page">
         <div class="app">
-          <a href="http://192.168.0.0:0" target="_blank">
+          <a
+            href="http://192.168.88.54:0"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div class="icon-wrapper">
               <span class="material-icons-outlined">library_books</span>
             </div>
             <div class="app-name">Books</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="http://192.168.88.54:8000"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-symbols-outlined">deployed_code</span>
+            </div>
+            <div class="app-name">Containers</div>
+          </a>
+        </div>
+        <div class="app">
+          <a
+            href="smb://192.168.88.54/time machine"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="icon-wrapper">
+              <span class="material-symbols-outlined">hard_disk</span>
+            </div>
+            <div class="app-name">Storage</div>
           </a>
         </div>
       </div>
