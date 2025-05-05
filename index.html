@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏠 Home Server</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Overpass", sans-serif;
+        background-color: #2f2225;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 0;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 28px;
+        margin: 10px 0;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        color: #cfcfcf;
+        margin-bottom: 25px;
+      }
+
+      a,
+      a:visited,
+      a:active,
+      a:hover {
+        color: white;
+        text-decoration: none;
+        outline: none;
+      }
+
+      .search {
+        margin-bottom: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .search input {
+        width: 500px;
+        max-width: 700px;
+        padding: 20px 24px;
+        font-size: 18px;
+        border-radius: 20px;
+        border: none;
+        background-color: #3b2c30;
+        color: white;
+        outline: none;
+        box-sizing: border-box;
+        text-align: left;
+      }
+
+      .pages {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        width: 100%;
+        max-width: 600px;
+        gap: 20px;
+        padding-bottom: 30px;
+        height: 300px;
+        scroll-behavior: smooth;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        justify-content: left;
+      }
+
+      .pages::-webkit-scrollbar {
+        display: none;
+      }
+
+      .page {
+        min-width: 100%;
+        scroll-snap-align: start;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 10px;
+        justify-items: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      .icon-wrapper {
+        background-color: #3c2f31;
+        border: 1px solid #695d5f;
+        width: 72px;
+        height: 72px;
+        border-radius: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.2s ease;
+        margin: 0 auto;
+      }
+
+      .icon-wrapper:hover {
+        transform: scale(1.05);
+      }
+
+      .material-icons-outlined {
+        font-size: 32px;
+        color: white;
+      }
+
+      .app-name {
+        margin-top: 13px;
+        font-size: 13px;
+        height: 20px;
+      }
+
+      .dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: -10px;
+        cursor: pointer;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #777;
+        transition: background-color 0.2s ease;
+      }
+
+      .dot.active {
+        background-color: #fff;
+      }
+
+      .status {
+        margin-top: 40px;
+        font-size: 13px;
+        color: #bcbcbc;
+        text-align: center;
+      }
+
+      .status span {
+        color: #ffffff;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>🏠 Home Server</h1>
+    <div class="subtitle">Quick access to your self-hosted services</div>
+
+    <div class="search">
+      <form
+        action="http://192.168.0.0:5000/search"
+        method="GET"
+        target="_blank"
+      >
+        <input type="text" name="q" placeholder="Search with..." />
+      </form>
+    </div>
+
+    <div class="pages" id="pages">
+      <div class="page">
+        <div class="app">
+          <a href="http://192.168.0.0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">router</span>
+            </div>
+            <div class="app-name">Router</div>
+          </a>
+        </div>
+        <div class="app">
+          <a href="http://192.168.0.0:0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">house</span>
+            </div>
+            <div class="app-name">Smart Home</div>
+          </a>
+        </div>
+        <div class="app">
+          <a href="http://192.168.0.0:0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">tv</span>
+            </div>
+            <div class="app-name">Media</div>
+          </a>
+        </div>
+        <div class="app">
+          <a href="http://192.168.0.0:0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">cloud</span>
+            </div>
+            <div class="app-name">Cloud</div>
+          </a>
+        </div>
+        <div class="app">
+          <a href="http://192.168.0.0:0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">photo</span>
+            </div>
+            <div class="app-name">Photos</div>
+          </a>
+        </div>
+        <div class="app">
+          <a href="http://192.168.0.0:0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">code</span>
+            </div>
+            <div class="app-name">Code</div>
+          </a>
+        </div>
+        <div class="app">
+          <a href="http://192.168.0.0:0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">search</span>
+            </div>
+            <div class="app-name">Search</div>
+          </a>
+        </div>
+        <div class="app">
+          <a href="http://192.168.0.0:0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">key</span>
+            </div>
+            <div class="app-name">Password Generator</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="app">
+          <a href="http://192.168.0.0:0" target="_blank">
+            <div class="icon-wrapper">
+              <span class="material-icons-outlined">library_books</span>
+            </div>
+            <div class="app-name">Books</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+    </div>
+
+    <script>
+      const pages = document.getElementById("pages");
+      const dots = document.querySelectorAll(".dot");
+
+      dots[0].classList.add("active");
+
+      pages.addEventListener("scroll", () => {
+        const index = Math.round(pages.scrollLeft / pages.offsetWidth);
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === index);
+        });
+      });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => {
+          pages.scrollTo({
+            left: i * pages.offsetWidth,
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
